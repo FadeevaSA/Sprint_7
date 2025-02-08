@@ -1,64 +1,69 @@
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import requestsMethods.CourierLoginRequests;
+
+import static requestsMethods.CourierCreatingRequests.deleteCourier;
+import static requestsMethods.CourierCreatingRequests.sendPostRequestAllParameters;
+import static requestsMethods.CourierLoginRequests.*;
+import static responseMethods.CourierLoginResponse.*;
 
 public class CourierLoginTest {
 
     @Before
-    public void setUp() {
-        RestAssured.baseURI = "https://qa-scooter.praktikum-services.ru";
-        Response response = CourierCreating.sendPostRequestAllParameters();
+    public void before() {
+        CourierLoginRequests courierLoginRequests = new CourierLoginRequests();
+        sendPostRequestAllParameters();
     }
 
     @Test
     @DisplayName("Successful courier authorization")
     @Description("Code 200  for /api/v1/courier/login with all parameters")
     public void checkSuccessfulCourierAuthorization() {
-        Response response = CourierLogin.checkCourierAuthorization();
-        CourierLogin.check200SuccessResponse(response);
+        Response response = checkCourierAuthorization();
+        check200SuccessResponse(response);
     }
 
     @Test
     @DisplayName("Unsuccessful courier authorization without login")
     @Description("400 Bad Request for /api/v1/courier/login without login")
     public void checkUnsuccessfulAuthorizationWithoutLogin() {
-        Response response = CourierLogin.sendPostRequestWithoutLogin();
-        CourierLogin.check400ErrorResponse(response);
+        Response response = checkPostRequestWithoutLogin();
+        check400ErrorResponse(response);
     }
 
     @Test
     @DisplayName("Unsuccessful courier authorization without password")
     @Description("400 Bad Request for /api/v1/courier/login without password")
     public void checkUnsuccessfulAuthorizationWithoutPassword() {
-        Response response = CourierLogin.sendPostRequestWithoutPassword();
-        CourierLogin.check400ErrorResponse(response);
+        Response response = checkPostRequestWithoutPassword();
+        check400ErrorResponse(response);
     }
 
     @Test
     @DisplayName("Unsuccessful courier authorization with incorrect password")
     @Description("404 Bad Request for /api/v1/courier/login with incorrect password")
     public void checkUnsuccessfulAuthorizationWithIncorrectPassword() {
-        Response response = CourierLogin.checkAuthorizationWithIncorrectPassword();
-        CourierLogin.check404ErrorResponse(response);
+        Response response = checkAuthorizationWithIncorrectPassword();
+        check404ErrorResponse(response);
     }
 
     @Test
     @DisplayName("Unsuccessful courier authorization with incorrect login")
     @Description("404 Bad Request for /api/v1/courier/login with incorrect login")
     public void checkUnsuccessfulAuthorizationWithIncorrectLogin() {
-        Response response = CourierLogin.checkAuthorizationWithIncorrectLogin();
-        CourierLogin.check404ErrorResponse(response);
+        Response response = checkAuthorizationWithIncorrectLogin();
+        check404ErrorResponse(response);
     }
 
     @After
     public void after() {
-        Integer courierId = CourierLogin.getCourierId();
+        Integer courierId = getCourierId();
         if (courierId != null) {
-            CourierCreating.deleteCourier(courierId);
+            deleteCourier(courierId);
         }
     }
 }

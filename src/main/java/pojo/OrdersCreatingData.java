@@ -1,6 +1,8 @@
+package pojo;
+
 import java.util.List;
 
-public class OrdersCreating {
+public class OrdersCreatingData {
     private String firstName;
     private String lastName;
     private String address;
@@ -11,10 +13,7 @@ public class OrdersCreating {
     private String comment;
     private List<String> color;
 
-    public OrdersCreating() {
-    }
-
-    public OrdersCreating(String firstName, String lastName, String address, int metroStation, String phone, int rentTime, String deliveryDate, String comment, List<String> color) {
+    public OrdersCreatingData(String firstName, String lastName, String address, int metroStation, String phone, int rentTime, String deliveryDate, String comment, List<String> color) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -24,6 +23,9 @@ public class OrdersCreating {
         this.deliveryDate = deliveryDate;
         this.comment = comment;
         this.color = color;
+    }
+
+    public OrdersCreatingData() {
     }
 
     public String getFirstName() {

@@ -1,23 +1,27 @@
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.Before;
 import org.junit.Test;
+import requestsMethods.GetOrdersRequests;
+
+import static requestsMethods.GetOrdersRequests.sendGetRequestLimitTenOrders;
+import static responseMethods.GetOrdersResponse.checkCode200Response;
+import static responseMethods.GetOrdersResponse.checkListOfOrders;
 
 public class ListOfOrdersTest {
 
     @Before
-    public void setUp() {
-        RestAssured.baseURI = "https://qa-scooter.praktikum-services.ru";
+    public void before() {
+        GetOrdersRequests getOrdersRequests = new GetOrdersRequests();
     }
 
     @Test
     @DisplayName("Get list of 10 orders")
     @Description("Code 200 for /api/v1/orders?limit=10&page=0")
     public void getListOfTenAvailableOrders() {
-        Response response = ListOfOrders.sendGetRequestLimitTenOrders();
-        ListOfOrders.checkCode200Response(response);
-        ListOfOrders.checkListOfOrders(response);
+        Response response = sendGetRequestLimitTenOrders();
+        checkCode200Response(response);
+        checkListOfOrders(response);
     }
 }
