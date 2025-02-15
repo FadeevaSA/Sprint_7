@@ -4,7 +4,7 @@ import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import requestsMethods.CourierLoginRequests;
+import requestsMethods.BaseApi;
 
 import static requestsMethods.CourierCreatingRequests.deleteCourier;
 import static requestsMethods.CourierCreatingRequests.sendPostRequestAllParameters;
@@ -15,7 +15,7 @@ public class CourierLoginTest {
 
     @Before
     public void before() {
-        CourierLoginRequests courierLoginRequests = new CourierLoginRequests();
+        new BaseApi();
         sendPostRequestAllParameters();
     }
 

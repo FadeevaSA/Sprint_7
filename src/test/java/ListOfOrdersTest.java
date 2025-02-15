@@ -3,7 +3,7 @@ import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.Before;
 import org.junit.Test;
-import requestsMethods.GetOrdersRequests;
+import requestsMethods.BaseApi;
 
 import static requestsMethods.GetOrdersRequests.sendGetRequestLimitTenOrders;
 import static responseMethods.GetOrdersResponse.checkCode200Response;
@@ -13,7 +13,7 @@ public class ListOfOrdersTest {
 
     @Before
     public void before() {
-        GetOrdersRequests getOrdersRequests = new GetOrdersRequests();
+        new BaseApi();
     }
 
     @Test

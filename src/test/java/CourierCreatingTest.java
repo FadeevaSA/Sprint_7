@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import io.qameta.allure.junit4.DisplayName;
 import io.qameta.allure.Description;
+import requestsMethods.BaseApi;
 import requestsMethods.CourierCreatingRequests;
 import responseMethods.CourierCreatingResponse;
 
@@ -15,7 +16,7 @@ public class CourierCreatingTest {
 
     @Before
     public void before() {
-        CourierCreatingRequests courierRequests = new CourierCreatingRequests();
+        new BaseApi();
     }
 
     @Test
